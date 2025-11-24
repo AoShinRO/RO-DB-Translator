@@ -204,6 +204,7 @@ namespace RODatabaseTranslator
             catch
             {
                 original_name += " #FailedTranslation";
+                await Task.Delay(5000); // API Response await
                 return original_name;
             }
         }
