@@ -16,7 +16,6 @@ namespace RODatabaseTranslator
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private string YOUR_API_KEY = "863163e59faef83061d8c51aa834e09a";
 
         public MainWindow()
         {
