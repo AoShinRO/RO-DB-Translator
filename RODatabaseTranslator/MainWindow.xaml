@@ -30,6 +30,6 @@
             <ComboBoxItem Content="pt-BR" IsSelected="True"/>
             <ComboBoxItem Content="en-US" />
         </ComboBox>
-        <TextBox x:Name="ProgressText" HorizontalAlignment="Center" Margin="0,124,0,0" TextWrapping="Wrap" Text="" Background="Transparent"  VerticalAlignment="Top" Width="180" VerticalContentAlignment="Center" IsHitTestVisible="False"/>
+        <TextBox x:Name="ProgressText" Margin="10,147,10,0" TextWrapping="Wrap" Text="" Background="Transparent" VerticalAlignment="Top" VerticalContentAlignment="Center" IsHitTestVisible="False"/>
     </Grid>
 </Window>

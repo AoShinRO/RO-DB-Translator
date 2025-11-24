@@ -193,8 +193,9 @@ namespace RODatabaseTranslator
                 if (match.Success)
                 {
                     string name = match.Groups[1].Value;
+                    
                     if(IsANSIRanged(name)) // Skip Korean/Japanese callback
-                        return RemoveBracketedNumbers(name);
+                        return RemoveBracketedNumbers(Cap23(name));
                 }
                 original_name += " #FailedTranslation";
                 return original_name;
@@ -202,7 +203,7 @@ namespace RODatabaseTranslator
             catch
             {
                 original_name += " #FailedTranslation";
-                await Task.Delay(5000); // API Response await
+                await Task.Delay(1000); // API Response await
                 return original_name;
             }
         }
@@ -210,6 +211,14 @@ namespace RODatabaseTranslator
         private string RemoveBracketedNumbers(string text)
         {
             return Regex.Replace(text, @"\s*\[\d{1,3}\]", string.Empty);
+        }
+
+        public static string Cap23(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            return text.Length > 23 ? text.Substring(0, 23) : text;
         }
 
         private void DIVINEAPIKEY_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
