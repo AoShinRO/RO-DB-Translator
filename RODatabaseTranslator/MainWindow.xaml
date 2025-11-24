@@ -29,7 +29,6 @@
         <ComboBox x:Name="LangType" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ComboBoxItem Content="pt-BR" IsSelected="True"/>
             <ComboBoxItem Content="en-US" />
-            <ComboBoxItem Content="ko-KR" />
         </ComboBox>
         <TextBox x:Name="ProgressText" HorizontalAlignment="Center" Margin="0,124,0,0" TextWrapping="Wrap" Text="" Background="Transparent"  VerticalAlignment="Top" Width="180" VerticalContentAlignment="Center" IsHitTestVisible="False"/>
     </Grid>

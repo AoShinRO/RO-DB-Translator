@@ -187,15 +187,13 @@ namespace RODatabaseTranslator
                 if (mob_db)
                     pattern = @"\{[^}]*""name"":\s*""([^""]+)""";
                 else
-                {
                     pattern = @"""aegisName""\s*:\s*""[^""]+""[\s\S]*?""name""\s*:\s*""([^""]+)""";
-                }
-
+                
                 var match = Regex.Match(response, pattern, RegexOptions.IgnoreCase);
                 if (match.Success)
                 {
                     string name = match.Groups[1].Value;
-                    if(IsANSIRanged(name))
+                    if(IsANSIRanged(name)) // Skip Korean/Japanese callback
                         return RemoveBracketedNumbers(name);
                 }
                 original_name += " #FailedTranslation";
