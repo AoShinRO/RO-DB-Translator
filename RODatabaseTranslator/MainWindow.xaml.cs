@@ -152,7 +152,15 @@ namespace RODatabaseTranslator
                 InputFilePath.Text = openFileDialog.FileName;
             }
         }
-
+        public static bool IsANSIRanged(string text)
+        {
+            foreach (char c in text)
+            {
+                if (c > 255) // U+00FF — qualquer coisa acima é CJK, emojis, etc
+                    return false;
+            }
+            return true;
+        }
         private async Task<string> FetchTranslationAsync(string parseID, string original_name, bool mob_db)
         {
             if (Properties.Settings.Default.YOUR_API_KEY == string.Empty || Properties.Settings.Default.YOUR_API_KEY == "Enter your divine-pride APIKEY")
@@ -187,14 +195,15 @@ namespace RODatabaseTranslator
                 if (match.Success)
                 {
                     string name = match.Groups[1].Value;
-                    return RemoveBracketedNumbers(name);
+                    if(IsANSIRanged(name))
+                        return RemoveBracketedNumbers(name);
                 }
-                original_name += "# Failed Translation";
+                original_name += " #FailedTranslation";
                 return original_name;
             }
             catch
             {
-                original_name += "# Failed Translation";
+                original_name += " #FailedTranslation";
                 return original_name;
             }
         }
