@@ -194,8 +194,8 @@ namespace RODatabaseTranslator
                 {
                     string name = match.Groups[1].Value;
                     
-                    if(IsANSIRanged(name)) // Skip Korean/Japanese callback
-                        return RemoveBracketedNumbers(Cap23(name));
+                    if(IsANSIRanged(name) && !name.Contains("¿") && !name.Contains("®") && !name.Contains("µ") && !name.Contains("¡") && !name.Contains("÷") && !name.Contains("¾") && !name.Contains("§") && !name.Contains("Æ") && !name.Contains("½") && !name.Contains("¶") && !name.Contains("º") && !name.Contains("»") && !name.Contains("±")) // Skip Korean/Japanese callback
+                        return Cap23(RemoveBracketedNumbers(name), mob_db);
                 }
                 original_name += " #FailedTranslation";
                 return original_name;
@@ -203,7 +203,7 @@ namespace RODatabaseTranslator
             catch
             {
                 original_name += " #FailedTranslation";
-                await Task.Delay(1000); // API Response await
+                await Task.Delay(100); // API Response await
                 return original_name;
             }
         }
@@ -213,9 +213,9 @@ namespace RODatabaseTranslator
             return Regex.Replace(text, @"\s*\[\d{1,3}\]", string.Empty);
         }
 
-        public static string Cap23(string text)
+        public static string Cap23(string text, bool mob_db)
         {
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text) || !mob_db)
                 return text;
 
             return text.Length > 23 ? text.Substring(0, 23) : text;
