@@ -194,7 +194,24 @@ namespace RODatabaseTranslator
                 {
                     string name = match.Groups[1].Value;
                     
-                    if(IsANSIRanged(name) && !name.Contains("¿") && !name.Contains("®") && !name.Contains("µ") && !name.Contains("¡") && !name.Contains("÷") && !name.Contains("¾") && !name.Contains("§") && !name.Contains("Æ") && !name.Contains("½") && !name.Contains("¶") && !name.Contains("º") && !name.Contains("»") && !name.Contains("±")) // Skip Korean/Japanese callback
+                    if(IsANSIRanged(name) && 
+                        !name.Contains("¿") && 
+                        !name.Contains("®") && 
+                        !name.Contains("³") && 
+                        !name.Contains("²") && 
+                        !name.Contains("¹") && 
+                        !name.Contains("×") && 
+                        !name.Contains("µ") && 
+                        !name.Contains("¡") && 
+                        !name.Contains("÷") && 
+                        !name.Contains("¾") && 
+                        !name.Contains("§") && 
+                        !name.Contains("Æ") && 
+                        !name.Contains("½") && 
+                        !name.Contains("¶") &&
+                        !name.Contains("º") &&
+                        !name.Contains("»") &&
+                        !name.Contains("±")) // Skip Korean/Japanese callback
                         return Cap23(RemoveBracketedNumbers(name), mob_db);
                 }
                 original_name += " #FailedTranslation";
