@@ -212,7 +212,7 @@ namespace RODatabaseTranslator
                         !name.Contains("º") &&
                         !name.Contains("»") &&
                         !name.Contains("±")) // Skip Korean/Japanese callback
-                        return Cap23(RemoveBracketedNumbers(name), mob_db);
+                        return Cap23(CleanName(name), mob_db);
                 }
                 original_name += " #FailedTranslation";
                 return original_name;
@@ -225,9 +225,21 @@ namespace RODatabaseTranslator
             }
         }
 
-        private string RemoveBracketedNumbers(string text)
+        private string CleanName(string text)
         {
-            return Regex.Replace(text, @"\s*\[\d{1,3}\]", string.Empty);
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            string result = Regex.Replace(text, @"\[(.*?)\]", match =>
+            {
+                string inside = match.Groups[1].Value;
+                if (Regex.IsMatch(inside, @"^\d+$"))
+                    return "";
+                return inside;
+            });
+            result = Regex.Replace(result, ":", "");
+
+            return result.Trim();
         }
 
         public static string Cap23(string text, bool mob_db)
