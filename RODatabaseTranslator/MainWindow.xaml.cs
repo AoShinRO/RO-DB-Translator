@@ -244,10 +244,10 @@ namespace RODatabaseTranslator
 
         public static string Cap23(string text, bool mob_db)
         {
-            if (string.IsNullOrEmpty(text) || !mob_db)
+            if (string.IsNullOrEmpty(text))
                 return text;
 
-            return text.Length > 23 ? text.Substring(0, 23) : text;
+            return text.Length > (mob_db ? 23:39) ? text.Substring(0, (mob_db ? 23:39)) : text;
         }
 
         private void DIVINEAPIKEY_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
